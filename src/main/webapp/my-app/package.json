@@ -1,0 +1,66 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "proxy": "http://localhost:8080",
+  "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
+    "@owsas/nominatim-js": "^1.0.1",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "axios": "^0.20.0",
+    "bootstrap": "^4.5.2",
+    "chart.js": "^2.9.3",
+    "classnames": "^2.2.6",
+    "cross-fetch": "^3.0.5",
+    "google-maps-react": "^2.0.6",
+    "jwt-decode": "^2.2.0",
+    "material-table": "^1.69.0",
+    "material-ui-icons": "^1.0.0-beta.36",
+    "notistack": "^1.0.0",
+    "primeicons": "^4.0.0",
+    "primereact": "^5.0.0-rc.1",
+    "qrcode.react": "^1.0.0",
+    "react": "^16.13.1",
+    "react-autocomplete": "^1.8.1",
+    "react-bootstrap": "^1.3.0",
+    "react-dom": "^16.13.1",
+    "react-geocode": "^0.2.1",
+    "react-google-autocomplete": "^1.2.6",
+    "react-google-maps": "^9.4.5",
+    "react-places-autocomplete": "^7.3.0",
+    "react-qr-code": "^1.0.2",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.3",
+    "react-scroll": "^1.8.1",
+    "react-stomp": "^5.0.0",
+    "react-transition-group": "^4.4.1",
+    "react.qrcode.generator": "0.0.3",
+    "sockjs-client": "^1.5.0",
+    "stompjs": "^2.3.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
