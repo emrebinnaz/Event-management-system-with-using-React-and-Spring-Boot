@@ -2,26 +2,28 @@ Event-management-system-with-using-Spring-Boot-and-React
 
 <h2> Screenshots </h2>
 
-<p>Login Page</p>
+<h4>Login Page</h4>
+
+
 
 ![alt text](https://github.com/emrebinnaz/Event-management-system-with-using-React-and-Spring-Boot/blob/master/src/main/screenshots/giriş.JPG?raw=true)
 
-<p>Events</p>
+<h4>Events</h4>
 
 ![alt text](https://github.com/emrebinnaz/Event-management-system-with-using-React-and-Spring-Boot/blob/master/src/main/screenshots/etkinlikler%20organizator.JPG?raw=true) 
 
-<p>Location Of An Event </p>
+<h4>Location Of An Event </h4>
 
 
 ![alt text](https://github.com/emrebinnaz/Event-management-system-with-using-React-and-Spring-Boot/blob/master/src/main/screenshots/konum.JPG?raw=true)
 
 
-<p>Statistics of an event </p>
+<h4>Statistics of an event </h4>
 
 ![alt text](https://github.com/emrebinnaz/Event-management-system-with-using-React-and-Spring-Boot/blob/master/src/main/screenshots/istatistik.JPG?raw=true)
 
 
-<p> Survey statistics of some events </p>
+<h4> Survey statistics of some events </h4>
 
 
 ![alt text](https://github.com/emrebinnaz/Event-management-system-with-using-React-and-Spring-Boot/blob/master/src/main/screenshots/anket%202.JPG?raw=true)
@@ -31,12 +33,12 @@ Event-management-system-with-using-Spring-Boot-and-React
 
 ![alt text](https://github.com/emrebinnaz/Event-management-system-with-using-React-and-Spring-Boot/blob/master/src/main/screenshots/anket%201.JPG?raw=true)
 
-<p>Organizators can add questions that participants must answer after adding an event </p>
+<h4>Organizators can add questions that participants must answer after adding an event </h4>
 
 
 ![alt text](https://github.com/emrebinnaz/Event-management-system-with-using-React-and-Spring-Boot/blob/master/src/main/screenshots/etkinlik%20sorular%C4%B1.JPG?raw=true)
 
 
-<p>Participants can ask question about the event which they have joined. </p>
+<h4>Participants can ask question about the event which they have joined. </h4>
 
 ![alt text](https://github.com/emrebinnaz/Event-management-system-with-using-React-and-Spring-Boot/blob/master/src/main/screenshots/kat%C4%B1l%C4%B1mc%C4%B1.JPG)
