@@ -31,6 +31,11 @@ Event-management-system-with-using-Spring-Boot-and-React
 
 ![alt text](https://github.com/emrebinnaz/Event-management-system-with-using-React-and-Spring-Boot/blob/master/src/main/screenshots/anket%201.JPG?raw=true)
 
+<p>Organizators can add questions that participants must answer after adding an event </p>
+
+
+![alt text](https://github.com/emrebinnaz/Event-management-system-with-using-React-and-Spring-Boot/blob/master/src/main/screenshots/etkinlik%20sorular%C4%B1.JPG?raw=true)
+
 
 <p>Participants can ask question about the event which they have joined. </p>
 
