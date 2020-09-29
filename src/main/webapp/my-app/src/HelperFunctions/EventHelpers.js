@@ -17,5 +17,6 @@ export const getEvent = async (eventName) => {
     }).catch(err => {
         this.props.history.push('/notFound404');
     });
+
     return response;
 }
