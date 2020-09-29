@@ -8,7 +8,6 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import net.glxn.qrgen.javase.QRCode;
-import org.springframework.web.servlet.view.RedirectView;
 
 import javax.imageio.ImageIO;
 import javax.mail.util.ByteArrayDataSource;
@@ -18,6 +17,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 public class QRGenBarcodeGenerator {
+
     public static BufferedImage generateQRCodeImage(String barcodeText) throws Exception {
         ByteArrayOutputStream stream = QRCode
                 .from(barcodeText)

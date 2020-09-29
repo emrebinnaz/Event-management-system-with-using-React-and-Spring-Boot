@@ -4,30 +4,21 @@ import EventDetails from "../Event/EventInformation/EventDetails";
 import EventLocation from "../Event/EventInformation/EventLocation";
 import Alert from '@material-ui/lab/Alert';
 import ParticipantInformation from "../Participant/ParticipantInformation";
+import {getEvent} from "../../HelperFunctions/EventHelpers";
 class InformationInsideOfQrCode extends Component {
     state = {
         event : [],
         participant : [],
     }
 
-    componentDidMount = () => {
-        this.getEvent();
-        this.getParticipant();
-    }
-
-    getEvent = async () => {
+    componentDidMount = async () => {
         const {eventName} = this.props.match.params;
-        const response = await axios.get(`/events/${eventName}`, {
-            headers : {
-                authorization : 'Bearer ' + localStorage.getItem('jwtToken')
-            }
-        }).catch(err => {
-            this.props.history.push('/notFound404');
+        await getEvent(eventName).then(event => {
+            this.setState({
+                event : event.data
+            })
         });
-        this.setState({
-            event : response.data
-        })
-
+        this.getParticipant();
     }
 
     getParticipant = async () => {

@@ -4,6 +4,7 @@ import {isLecturer, isParticipant} from "../../../Authentication";
 import AnswerTextArea from "./AnswerTextArea";
 import AnswerCard from "./AnswerCard";
 class QuestionCard extends Component {
+
     constructor(props) {
         super(props);
         this.state = {

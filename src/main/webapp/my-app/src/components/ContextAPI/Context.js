@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import jwtDecode from 'jwt-decode';
+import {getEvents} from "../../HelperFunctions/EventHelpers";
 
 const context = React.createContext();
 
@@ -62,7 +63,7 @@ export class Provider extends Component {
     }
 
     componentDidMount = async () => {
-        const response = await axios.get('/events');
+        const response = await getEvents();
         this.setState({
             events : response.data
         })

@@ -15,7 +15,6 @@ class ParticipantsOfEvent extends Component {
 
     componentDidMount = () =>{
         this.getParticipantsOfEvent();
-
     }
 
     getParticipantsOfEvent = async () =>{
@@ -30,7 +29,6 @@ class ParticipantsOfEvent extends Component {
         this.setState({
             participants : response.data
         })
-
     }
 
     render() {

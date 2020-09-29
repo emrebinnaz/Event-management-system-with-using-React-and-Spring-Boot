@@ -56,7 +56,6 @@ public class EventService {
             return new MessageResponse("Bu etkinlik eklenemez",ERROR);
         }
         return new MessageResponse("Etkinlik başarılı bir şekilde eklendi.",SUCCESS);
-        
     }
 
     private boolean isAnyEventNameSameWith(String name) {

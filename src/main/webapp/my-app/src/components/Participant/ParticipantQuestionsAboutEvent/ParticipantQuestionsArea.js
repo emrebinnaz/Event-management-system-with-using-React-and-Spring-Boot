@@ -113,7 +113,7 @@ class ParticipantQuestionsArea extends Component {
     }
 
     render() {
-        const {isEventStartedAndNotFinished,isBackdropOpen,
+        const {isBackdropOpen,
             participantQuestions} = this.state;
         const {event} = this.props;
         return (

@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.HashSet;
 @Builder
 public class EventDTO {
+
     @JsonProperty("name")
     @Size(max = 255, message = "İsim 255 karakterden fazla olamaz")
     @NotBlank(message ="Etkinlik ismi boş olmamalı.")

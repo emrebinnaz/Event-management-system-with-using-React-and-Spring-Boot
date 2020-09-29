@@ -5,27 +5,18 @@ import com.example.EMS.event.entity.Event;
 import com.example.EMS.person.entity.Participant;
 import com.google.zxing.WriterException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.core.io.InputStreamSource;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.BufferedImageHttpMessageConverter;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.view.RedirectView;
 
 import javax.activation.DataHandler;
 import javax.mail.BodyPart;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
-import javax.activation.DataSource;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 
@@ -78,7 +69,6 @@ public class EmailService {
                 "ve kendi bilgilerinize ulasabilirsiniz.</H3><img src=\"cid:image\">";
         messageBodyPart.setContent(htmlText, "text/html");
         multipart.addBodyPart(messageBodyPart);
-
     }
 
     public ByteArrayDataSource createQrCodeWith(Participant participant,Event event) throws IOException, WriterException {

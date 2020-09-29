@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from "axios";
 import {Button, Card, Form, InputGroup} from "react-bootstrap";
 import {isParticipant} from "../../Authentication";
+import {getEvent} from "../../HelperFunctions/EventHelpers";
 
 class ParticipantAnswers extends Component {
     constructor(props) {
@@ -19,6 +20,7 @@ class ParticipantAnswers extends Component {
                 this.getAnswersOfQuestions();
             });
         });
+
     }
 
     getEvent = async () => {

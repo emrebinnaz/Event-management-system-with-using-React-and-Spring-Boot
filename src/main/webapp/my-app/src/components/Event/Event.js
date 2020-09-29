@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Card,Button,Spinner} from 'react-bootstrap'
+import {Card} from 'react-bootstrap'
 import EventNavbar from "./EventNavbar";
 import axios from 'axios';
 import EventDetails from "./EventInformation/EventDetails"
@@ -10,7 +10,9 @@ import EventParticipation from "./EventInformation/EventParticipation";
 import {isOrganizator,isParticipant} from "../../Authentication";
 import {Link} from 'react-router-dom';
 import ParticipantQuestionsArea from "../Participant/ParticipantQuestionsAboutEvent/ParticipantQuestionsArea";
+import {getEvent} from "../../HelperFunctions/EventHelpers";
 class Event extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -25,21 +27,11 @@ class Event extends Component {
         })
     }
 
-    componentDidMount() {
-        this.getEvent();
-    }
-
-    getEvent = async () => {
+    componentDidMount = async () => {
         const {eventName} = this.props.match.params;
-        const response = await axios.get(`/events/${eventName}`, {
-            headers : {
-                authorization : 'Bearer ' + localStorage.getItem('jwtToken')
-            }
-        }).catch(err => {
-            this.props.history.push('/notFound404');
-        });
+        const response = await getEvent(eventName);
         this.setState({
-            event : response.data
+          event : response.data
         })
     }
 
@@ -47,7 +39,6 @@ class Event extends Component {
 
         const {linkContent,event} = this.state;
         return (
-
            <div className={"container col-md-9 mt-5 "}>
                <Card>
                     <Card.Header  style = {{cursor : "pointer"}}>

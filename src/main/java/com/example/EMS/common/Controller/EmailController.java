@@ -46,6 +46,7 @@ public class EmailController {
             emailService.sendEmailWithQrCode(participant,event);
         }
     }
+
     @PostMapping("/toRaffleWinner/{participantUsername}")
     public void sendEmailToRaffleWinner(@PathVariable String participantUsername,
                                         @RequestBody @Valid EventDTO eventDTO) {

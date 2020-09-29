@@ -24,6 +24,7 @@ public interface ParticipantsInEventsRepository
             boolean isExistsParticipationWith(@Param("event_id") Integer event_id,
                                               @Param("participant_id")Integer participant_id);
 
+
     @Query(value = "SELECT pie.partition_date AS partitionDate, COUNT(pie.*) AS partitionCount " +
             "FROM participants_in_events AS pie " +
             "WHERE pie.event_id = :event_id" +

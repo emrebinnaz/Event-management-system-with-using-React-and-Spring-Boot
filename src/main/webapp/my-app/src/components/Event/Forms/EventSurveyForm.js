@@ -132,7 +132,7 @@ class EventSurveyForm extends Component {
     }
 
     answerOptionsArea = () => {
-        const {maxAnswerOptionCount,question,answerOptionsWithIndexes} = this.state;
+        const {maxAnswerOptionCount,answerOptionsWithIndexes} = this.state;
         return <div>{Array.from(Array(parseInt(maxAnswerOptionCount)), (e, i) => {
             return<Form.Group key ={i + "form group"}>
                 <Form.Label key ={i + "form label"}>

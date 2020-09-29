@@ -3,6 +3,7 @@ import axios from 'axios';
 import {Form, InputGroup} from "react-bootstrap";
 import EventSelectionForStatistics from "./EventSelectionForStatistics";
 import EventBarChart from './EventBarChart'
+import {getEvents} from "../../../HelperFunctions/EventHelpers";
 class EventStatistics extends Component {
 
     state = {
@@ -15,21 +16,13 @@ class EventStatistics extends Component {
         participationDates : [],
     }
 
-    componentDidMount = () => {
-        this.getAllEvents();
+    componentDidMount = async () => {
+         const response = await getEvents();
+         this.setState({
+             events: response.data
+         })
     }
 
-    getAllEvents = async () =>{
-       await axios.get('/events', {
-           headers: {
-               authorization: 'Bearer ' + localStorage.getItem('jwtToken')
-           },
-            }).then((response) =>{
-           this.setState({
-               events : response.data
-           })
-       })
-    }
     handleEventStatisticsChoice = (e) => {
         e.preventDefault();
         this.setState({
@@ -124,10 +117,11 @@ class EventStatistics extends Component {
 
                     </div>
             </form>
-                {(isOpenedEventBarChart  && statisticsType === "showGraphicsWithParticipationCount") ? <EventBarChart
-                    labels = {this.state.eventNames}
-                    label = "Katılımcı Sayısı"
-                    data = {this.state.participationCountsOfEvents}/> : null}
+                {(isOpenedEventBarChart  && statisticsType === "showGraphicsWithParticipationCount") ?
+                    <EventBarChart
+                        labels = {this.state.eventNames}
+                        label = "Katılımcı Sayısı"
+                        data = {this.state.participationCountsOfEvents}/> : null}
                 {(isOpenedEventBarChart &&
                     statisticsType === "showGraphicsWithParticipationDate"
                 && this.state.participationDates.length != 0) ?

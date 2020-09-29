@@ -10,6 +10,7 @@ class AnswerTextArea extends Component {
             answerText : '',
         }
     }
+
     sendAnswer = async (e) =>{
         e.preventDefault();
         const {questionIndex,event,question,participant} = this.props;
@@ -21,7 +22,6 @@ class AnswerTextArea extends Component {
             question : question,
             participant : participant
         };
-        console.log(event);
 
         const response = await axios.put(`/sendLecturerAnswer/`, updatedParticipantQuestion,{
             headers : {

@@ -92,8 +92,8 @@ class EventTable extends Component {
                         <div className={"container w-75 mt-5"}>
                             <MaterialTable
                                 title={<Typography variant="h4" component="h5">
-                                    Etkinlik Listesi
-                                </Typography>}
+                                            Etkinlik Listesi
+                                        </Typography>}
                                 columns={this.state.columns}
                                 data={isParticipant() ?
                                      events.filter(event => new Date(event.startDate) > new Date()) : this.props.events}

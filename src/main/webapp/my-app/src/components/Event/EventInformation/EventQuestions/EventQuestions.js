@@ -5,6 +5,7 @@ import {withRouter} from "react-router-dom";
 import {isOrganizator, isParticipant} from "../../../../Authentication";
 import CustomizedSnackbar from "../../../static/Snackbars/CustomizedSnackbar";
 import QrCode from "../../../QrCode/QrCode";
+import {getEvent} from "../../../../HelperFunctions/EventHelpers";
 class EventQuestions extends Component {
     state = {
         questions : [],
@@ -17,33 +18,21 @@ class EventQuestions extends Component {
         isOpenedQrCode : false,
     }
 
-    componentDidMount = () => {
-        this.getEvent().then( event => {
+    componentDidMount = async () => {
+        const {name} = this.props.event;
+        await getEvent(name).then(response => {
+            this.setState({
+                event : response.data
+            })
             if(isParticipant()){
                 this.isParticipantAlreadyAnsweredToQuestions();
             }
             this.getQuestionsOfEvent();
-
-        });
-
-    }
-
-    getEvent = async () => {
-        const response = await axios.get(`/events/${this.props.event.name}`, {
-            headers: {
-                authorization: 'Bearer ' + localStorage.getItem('jwtToken')
-            }
-        }).catch(err => {
-            this.props.history.push('/notFound404');
-        });
-        this.setState({
-            event: response.data
         })
-        return response.data;
+
     }
 
     isParticipantAlreadyAnsweredToQuestions = async () =>{
-        const {event} = this.props;
         var participantUsername = localStorage.getItem('username');
         const response = await axios.get(`/answersOfEvent/${this.props.event.name}/${participantUsername}`, {
             headers: {
@@ -107,7 +96,7 @@ class EventQuestions extends Component {
 
     sendEmailToParticipant = async () =>{
         var participantUsername = localStorage.getItem("username");
-        const response = await axios.post(`/sendEmail/${participantUsername}`,
+        await axios.post(`/sendEmail/${participantUsername}`,
             this.props.event, {
                 headers : {
                     'Authorization' : "Bearer " + localStorage.getItem("jwtToken")
@@ -163,6 +152,7 @@ class EventQuestions extends Component {
             isParticipationSuccessfull : false
         })
     }
+
     closeQrCode = () => {
         this.setState({
             isOpenedQrCode : false

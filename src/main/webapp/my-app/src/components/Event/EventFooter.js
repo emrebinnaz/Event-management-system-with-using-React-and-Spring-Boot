@@ -50,8 +50,7 @@ class EventFooter extends Component {
     }
 
     render() {
-        const{informationMessageAboutEvent,isJoinedBefore} = this.state;
-
+        const{isJoinedBefore} = this.state;
         return (
             <div>
                 <p className={"text-muted float-right"}>
@@ -67,12 +66,3 @@ class EventFooter extends Component {
 
 export default withRouter(EventFooter);
 
-/* {(this.isEventFull()) ?  <p className={"text-muted float-right"}>
-                               Bu etkinliğin kontenjanı doldu.</p> :
-                           null}
-                       {(  isOrganizator()) ? <Link to = {`/participants/${event.name}`}>Katılımcıları görüntüle</Link> : null}
-                       {(  isJoinedBefore) ?
-                           <p className={"text-muted float-right"}> Bu etkinliğe daha önceden katılım yaptınız.</p> : null}
-                       {(isParticipant() && !isJoinedBefore && !this.isEventFull()) ? <Button className = "btn-info float-right"
-                                                                       onClick={(e) => this.joinEvent(e)}>Etkinliğe katıl</Button>
-                                                                        : null}*/

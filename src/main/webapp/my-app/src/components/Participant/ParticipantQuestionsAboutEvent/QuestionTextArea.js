@@ -5,6 +5,7 @@ import axios from "axios";
 import CustomizedSnackbar from "../../static/Snackbars/CustomizedSnackbar";
 import {withRouter} from "react-router-dom";
 import {Form} from "react-bootstrap";
+import {getEvent} from "../../../HelperFunctions/EventHelpers";
 class QuestionTextArea extends Component {
 
     constructor(props){
@@ -21,31 +22,22 @@ class QuestionTextArea extends Component {
         };
     }
 
-    componentDidMount = () => {
-        this.getEvent().then(event => {
-            if(isParticipant()){
-                this.getParticipant();
-                this.isParticipantAlreadyJoinedTo(event);
-            }
-            else if(isLecturer()) {
-                this.isLecturerAlreadyJoinedTo(event);
-            }
-        })
-    }
-
-    getEvent = async () => {
+    componentDidMount = async () => {
         const {eventName} = this.props.match.params;
-        const response = await axios.get(`/events/${eventName}`, {
-            headers : {
-                authorization : 'Bearer ' + localStorage.getItem('jwtToken')
-            }
-        }).catch(err => {
-            this.props.history.push('/notFound404');
-        });
-        this.setState({
-            event : response.data
+        await getEvent(eventName).then(response => {
+            this.setState({
+                event : response.data
+            }, () => {
+                if(isParticipant()){
+                    this.getParticipant();
+                    this.isParticipantAlreadyJoinedTo(this.state.event);
+                }
+                else if(isLecturer()) {
+                    this.isLecturerAlreadyJoinedTo(this.state.event);
+                }
+            })
         })
-        return response.data;
+
     }
 
     getParticipant = async () =>{

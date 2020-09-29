@@ -14,7 +14,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function AnswerOptionsOfQuestion(props) {
 
-    console.log(props.answerOptions);
     return(
         <div>
             <Dialog

@@ -7,6 +7,7 @@ class EventNavbar extends Component {
     constructor(props) {
         super(props);
     }
+
     navigateEventToRelatedPart = (e) =>{
         var newLink = e.target.textContent;
         this.props.handleNavigation(newLink);
