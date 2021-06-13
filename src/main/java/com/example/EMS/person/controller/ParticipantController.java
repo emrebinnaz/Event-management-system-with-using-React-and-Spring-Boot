@@ -9,10 +9,12 @@ import com.example.EMS.event.entity.Survey.EventSurveyQuestions;
 import com.example.EMS.event.mapper.EventMapper;
 import com.example.EMS.event.mapper.EventSurveyQuestionMapper;
 import com.example.EMS.person.dto.ParticipantDTO;
+import com.example.EMS.person.dto.ParticipantsInEventsDTO;
 import com.example.EMS.person.entity.Participant;
 import com.example.EMS.person.entity.ParticipantsInEvents;
 import com.example.EMS.person.mapper.LecturerMapper;
 import com.example.EMS.person.mapper.ParticipantMapper;
+import com.example.EMS.person.mapper.ParticipantsInEventsMapper;
 import com.example.EMS.person.service.LecturerService;
 import com.example.EMS.person.service.ParticipantService;
 import com.example.EMS.person.service.ParticipantsInEventsService;
@@ -37,6 +39,7 @@ public class ParticipantController {
     private final ParticipantService participantService;
     private final ParticipantsInEventsService participantsInEventsService;
     private final EventMapper eventMapper;
+    private final ParticipantsInEventsMapper participantsInEventsMapper;
 
     @PostMapping("/join/{username}")
     @PreAuthorize("hasAuthority('PARTICIPANT')")
@@ -75,6 +78,19 @@ public class ParticipantController {
         Optional<Participant> optionalParticipant = participantService.findByUsername(participantUsername);
         Participant participant = optionalParticipant.get();
         return eventMapper.mapToDto(participantService.getEventsOfParticipant(participant));
+    }
+
+    @GetMapping("/{username}/and/{eventName}/information")
+    @PreAuthorize("hasAuthority('PARTICIPANT')")
+    public ParticipantsInEventsDTO getEventInformationForParticipant(@PathVariable String username,
+                                           @PathVariable String eventName) {
+
+        final ParticipantsInEvents participantInEvent = participantService.getEventInfoForParticipant(eventName,
+                username);
+
+        final ParticipantsInEventsDTO participantsInEventsDTO = participantsInEventsMapper.mapToDto(participantInEvent);
+
+        return participantsInEventsDTO;
     }
 
     @PostMapping(value = "/sendQrCodeOf/{username}",

@@ -2,6 +2,7 @@ package com.example.EMS.person.service;
 
 import com.example.EMS.common.MessageResponse;
 import com.example.EMS.common.service.EmailService;
+import com.example.EMS.common.service.FileService;
 import com.example.EMS.event.entity.Event;
 import com.example.EMS.event.service.EventService;
 import com.example.EMS.person.dto.ParticipantDTO;
@@ -31,7 +32,8 @@ public class ParticipantsInEventsService {
     private final ParticipantService participantService;
     private final EventService eventService;
     private final ParticipantsInEventsRepository participantsInEventsRepository;
-    private ParticipantsInEvents newParticipation = new ParticipantsInEvents();
+    private final FileService fileService;
+    ParticipantsInEvents participantInEvents = new ParticipantsInEvents();
 
     @Transactional
     public MessageResponse addParticipantToEvent(String username, Event event) {
@@ -50,12 +52,18 @@ public class ParticipantsInEventsService {
                 return new MessageResponse("Bu etkinliğe daha önceden başvurdunuz ! ",
                         ERROR);
             }
-            newParticipation = new ParticipantsInEvents(
-                    eventFromDB,
-                    participant,
-                    java.time.LocalDate.now(),null);
-           saveNewParticipationToEvent(eventFromDB);
-           saveNewParticipationToParticipant(participant);
+
+
+            participantInEvents.setParticipant(participant);
+            participantInEvents.setEvent(eventFromDB);
+            participantInEvents.setPartitionDate(java.time.LocalDate.now());
+            participantInEvents.setParticipantQuestions(null);
+
+            final byte[] pdfAboutEventInfo = fileService.createPdfAboutEventInfo(participantInEvents);
+            participantInEvents.setEventInfoDocument(pdfAboutEventInfo);
+
+            saveNewParticipationToEvent(eventFromDB);
+            saveNewParticipationToParticipant(participant);
            return new MessageResponse("Etkinliğe başarılı bir şekilde kayıt oldunuz." +
                     "Mail'inize etkinliğin detaylarını içeren bir QR Code yolluyoruz.",
                     SUCCESS);
@@ -90,12 +98,12 @@ public class ParticipantsInEventsService {
     }
 
     private void saveNewParticipationToEvent(Event event) {
-        event.getParticipantsInEvents().add(newParticipation);
+        event.getParticipantsInEvents().add(participantInEvents);
         eventService.save(event);
     }
 
     private void saveNewParticipationToParticipant(Participant participant) {
-        participant.getParticipantsInEvents().add(newParticipation);
+        participant.getParticipantsInEvents().add(participantInEvents);
         participantService.save(participant);
     }
 
@@ -114,4 +122,15 @@ public class ParticipantsInEventsService {
         return participationCountInADays;
     }
 
+    @Transactional
+    public byte[] downloadPdfAboutEventInfo(ParticipantsInEvents participantInEvent) {
+        final String name = participantInEvent.getEvent().getName();
+        final Event eventByName = eventService.getEventByName(name);
+        final String username = participantInEvent.getParticipant().getUsername();
+        final Optional<Participant> optionalParticipant = participantService.findByUsername(username);
+
+        final Integer participantId = optionalParticipant.get().getId();
+        return participantsInEventsRepository.getParticipantInEvent(eventByName.getId(), participantId).getEventInfoDocument();
+
+    }
 }

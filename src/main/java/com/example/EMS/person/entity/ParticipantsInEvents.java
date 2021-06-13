@@ -34,6 +34,9 @@ public class ParticipantsInEvents implements Serializable {
     @Column(name ="PARTITION_DATE")
     private LocalDate partitionDate;
 
+    @Lob
+    private byte [] eventInfoDocument;
+
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "EVENT_ID")

@@ -2,6 +2,7 @@ package com.example.EMS.person.service;
 
 import com.example.EMS.common.MessageResponse;
 import com.example.EMS.common.QRGenBarcodeGenerator;
+import com.example.EMS.common.service.FileService;
 import com.example.EMS.event.dto.EventDTO;
 import com.example.EMS.event.entity.Event;
 import com.example.EMS.event.service.EventService;
@@ -25,14 +26,17 @@ import java.util.*;
 @Service
 @RequiredArgsConstructor
 public class ParticipantService {
+
     private final ParticipantRepository participantRepository;
     private final EventService eventService;
+    private final FileService fileService;
+
     public Optional<Participant> findByUsername(String username){
         return participantRepository.findByUsername(username);
     }
 
     public void save(Participant participant) {
-        System.out.println(participant.getEmail() + participant.getEventSurveyAnswers());
+
         participantRepository.save(participant);
     }
 
@@ -66,5 +70,20 @@ public class ParticipantService {
     public boolean isAnyParticipantHasSameEmailWith(String email) {
         Optional<Participant> optionalParticipant = participantRepository.findByEmail(email);
         return optionalParticipant.isPresent();
+    }
+
+    public ParticipantsInEvents getEventInfoForParticipant(String eventName,
+                                                           String username) {
+
+        final Event event = eventService.getEventByName(eventName);
+        final Optional<Participant> optionalParticipant = participantRepository.findByUsername(username);
+        final Participant participant = optionalParticipant.get();
+
+        ParticipantsInEvents participantInEvent = new ParticipantsInEvents();
+
+        participantInEvent.setParticipant(participant);
+        participantInEvent.setEvent(event);
+
+        return participantInEvent;
     }
 }

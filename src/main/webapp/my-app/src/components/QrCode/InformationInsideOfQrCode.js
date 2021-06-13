@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import axios from "axios";
+
 import EventDetails from "../Event/EventInformation/EventDetails";
 import EventLocation from "../Event/EventInformation/EventLocation";
 import Alert from '@material-ui/lab/Alert';
 import ParticipantInformation from "../Participant/ParticipantInformation";
-import {getEvent} from "../../HelperFunctions/EventHelpers";
+import {getEventInformationForParticipant, downloadEventInformation} from "../../HelperFunctions/EventHelpers";
 class InformationInsideOfQrCode extends Component {
     state = {
         event : [],
@@ -12,26 +12,19 @@ class InformationInsideOfQrCode extends Component {
     }
 
     componentDidMount = async () => {
-        const {eventName} = this.props.match.params;
-        await getEvent(eventName).then(event => {
-            this.setState({
-                event : event.data
-            })
-        });
-        this.getParticipant();
-    }
+        const {eventName,username} = this.props.match.params;
 
-    getParticipant = async () => {
-        const {username} = this.props.match.params;
-        const response = await axios.get(`/participant/${username}`, {
-            headers : {
-                authorization : 'Bearer ' + localStorage.getItem('jwtToken')
-            }
-        }).catch(err => {
-            this.props.history.push('/notFound404');
-        });
+        const res = await getEventInformationForParticipant(eventName,username);
+        const {event, participant} = res.data;
+
         this.setState({
-            participant : response.data
+            event : event,
+            participant: participant
+        })
+        await downloadEventInformation(res.data).then(response => {
+
+            const url = window.URL.createObjectURL(new Blob([response.data], {type: 'application/pdf'}));
+            window.open(url);
         })
     }
 

@@ -97,7 +97,7 @@ public class UserService {
         System.out.println(optionalUsers.isPresent());
         return optionalUsers.isPresent();
     }
-
+ 
     private Set<Authority> getAuthoritiesOf(UserDTO userDTO) {
         return userDTO.getAuthorities()
                 .stream()

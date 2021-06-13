@@ -30,4 +30,15 @@ public interface ParticipantsInEventsRepository
             "WHERE pie.event_id = :event_id" +
             " GROUP BY pie.partition_date", nativeQuery = true)
     List<ParticipationCountInADay> countOfTotalParticipantsInDays(@Param("event_id") Integer event_id);
+
+    @Query(
+            value = "SELECT * " +
+                    "FROM participants_in_events " +
+                    "WHERE event_id = :event_id " +
+                    "and" +
+                    " participant_id = :participant_id",
+            nativeQuery = true)
+    ParticipantsInEvents getParticipantInEvent(@Param("event_id") Integer event_id,
+                          @Param("participant_id")Integer participant_id);
+
 }
