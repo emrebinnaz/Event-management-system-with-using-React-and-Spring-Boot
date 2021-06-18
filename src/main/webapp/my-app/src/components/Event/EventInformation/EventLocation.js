@@ -11,7 +11,7 @@ class EventLocation extends Component {
                 <h3 className={"card-title text-center"}>Etkinliğin Konumu</h3>
                 <div className="row">
                     <div className="col">
-                        <strong>Address :</strong>
+                        <strong>Adres :</strong>
                         <p className={"ml-3 d-inline"}>{address}</p>
                     </div>
                     <div className="col">

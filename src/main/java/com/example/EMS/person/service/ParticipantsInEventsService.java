@@ -124,6 +124,7 @@ public class ParticipantsInEventsService {
 
     @Transactional
     public byte[] downloadPdfAboutEventInfo(ParticipantsInEvents participantInEvent) {
+
         final String name = participantInEvent.getEvent().getName();
         final Event eventByName = eventService.getEventByName(name);
         final String username = participantInEvent.getParticipant().getUsername();
